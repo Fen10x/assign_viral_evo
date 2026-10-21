@@ -66,9 +66,12 @@ import numpy as np
 # calculating JC corrected distance and plotting the results
 reference_sequence = str(reference.seq).upper()
 
-df["JC_distance"] = df["sequence"].apply(
-    lambda seq: jukes_cantor(reference_sequence, seq)
-)
+distances = []
+for seq in df["sequence"]:
+    distance = jukes_cantor(reference_sequence, seq)
+    distances.append(distance)
+
+df["JC_distance"] = distances
 
 #Calculate elapsed time since first sample was collected
 df["elapsed_days"] = (

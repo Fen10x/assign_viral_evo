@@ -33,20 +33,20 @@ df["collection_date"] = pd.to_datetime(
 sample_A = df.loc[df["collection_date"].idxmin()]
 start_date = sample_A["collection_date"]
 
-"""
+
 # code to download th reference genome and save it to a file
 Entrez.email = "z5308203@ad.unsw.edu.au"
 ref_id = "NC_045512.2"
 with Entrez.efetch(
     db="nuccore",
     id=ref_id,
-    rettype="gb",
+    rettype="fasta",
     retmode="text"
 ) as handle:
-    reference = SeqIO.read(handle, "genbank")
+    reference = SeqIO.read(handle, "fasta")
 
-SeqIO.write(reference, "data/reference.gb", "genbank")
-"""
+SeqIO.write(reference, "data/reference.fasta", "genbank")
+
 
 reference = SeqIO.read("data/reference.gb", "genbank")
 # Extract the collection date for the reference genome and conevert it to a timestamp
